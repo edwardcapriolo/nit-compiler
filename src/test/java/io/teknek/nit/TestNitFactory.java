@@ -1,5 +1,7 @@
 package io.teknek.nit;
 
+import java.net.URL;
+
 import junit.framework.Assert;
 import groovy.lang.Closure;
 
@@ -26,5 +28,25 @@ public class TestNitFactory {
     Assert.assertNotNull(o);
   }
   
+  @Test
+  public void constuctClassWithConArgs() throws NitException { 
+    NitDesc n = new NitDesc();
+    n.setSpec(NitDesc.NitSpec.JAVA_LOCAL_CLASSPATH);
+    n.setTheClass("java.net.URL");
+    n.setConstructorArguments( new Object[]{ "http", "teknek.io", "/some/cool/stuff"} );
+    URL u = NitFactory.construct(n);
+    Assert.assertEquals ("teknek.io", u.getHost());
+  }
+  
+  @Test
+  public void constuctClassWithConArgsAndParams() throws NitException { 
+    NitDesc n = new NitDesc();
+    n.setSpec(NitDesc.NitSpec.JAVA_LOCAL_CLASSPATH);
+    n.setTheClass("java.net.URL");
+    n.setConstructorParameters( new Class [] { String.class, String.class, String.class } );
+    n.setConstructorArguments( new Object[]{ "http", "teknek.io", "/some/cool/stuff"} );
+    URL u = NitFactory.construct(n);
+    Assert.assertEquals ("teknek.io", u.getHost());
+  }
   
 }

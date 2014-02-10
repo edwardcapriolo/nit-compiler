@@ -14,14 +14,24 @@ public class NitDesc {
    */
   protected String theClass;
 
-  protected Object[] constructorParameters;
+  protected Class [] constructorParameters;
   
-  public Object[] getConstructorParameters() {
+  protected Object [] constructorArguments;
+  
+  public Class[] getConstructorParameters() {
     return constructorParameters;
   }
 
-  public void setConstructorParameters(Object[] constructorParameters) {
+  public void setConstructorParameters(Class[] constructorParameters) {
     this.constructorParameters = constructorParameters;
+  }
+
+  public Object [] getConstructorArguments() {
+    return constructorArguments;
+  }
+
+  public void setConstructorArguments(Object[] constructorArguments) {
+    this.constructorArguments = constructorArguments;
   }
 
   public NitSpec getSpec() {
