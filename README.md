@@ -27,3 +27,5 @@ Usage
       Object o = NitFactory.construct(n);
       Assert.assertNotNull(o);
     }
+
+In the long run nit will (probably) do a bunch of "Crazy" stuff like compile java inside java, build jars of java compiled inside java etc.
