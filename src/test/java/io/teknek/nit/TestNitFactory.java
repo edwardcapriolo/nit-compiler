@@ -18,7 +18,6 @@ public class TestNitFactory {
     Assert.assertEquals(1, c.call("dude"));
   }
   
-  
   @Test
   public void constructANoArgCllass() throws NitException {
     NitDesc n = new NitDesc();
