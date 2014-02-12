@@ -1,7 +1,7 @@
 package io.teknek.nit;
 
 public class NitDesc {
-  public enum NitSpec { JAVA_LOCAL_CLASSPATH, JAVA_URL_CLASSLOADER, GROOVY_CLOSURE };
+  public enum NitSpec { JAVA_LOCAL_CLASSPATH, JAVA_URL_CLASSLOADER, GROOVY_CLOSURE, GROOVY_CLASS_LOADER };
   protected NitSpec spec;
   
   /**

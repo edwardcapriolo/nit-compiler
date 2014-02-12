@@ -46,13 +46,13 @@ public class TestNitFactory {
   }
   
   @Test
-  public void constuctClassWithConArgs() throws NitException { 
+  public void constuctClassWithConArgs() throws NitException {
     NitDesc n = new NitDesc();
     n.setSpec(NitDesc.NitSpec.JAVA_LOCAL_CLASSPATH);
     n.setTheClass("java.net.URL");
-    n.setConstructorArguments( new Object[]{ "http", "teknek.io", "/some/cool/stuff"} );
+    n.setConstructorArguments(new Object[] { "http", "teknek.io", "/some/cool/stuff" });
     URL u = NitFactory.construct(n);
-    Assert.assertEquals ("teknek.io", u.getHost());
+    Assert.assertEquals("teknek.io", u.getHost());
   }
   
   @Test
@@ -64,6 +64,17 @@ public class TestNitFactory {
     n.setConstructorArguments(new Object[] { "http", "teknek.io", "/some/cool/stuff" });
     URL u = NitFactory.construct(n);
     Assert.assertEquals("teknek.io", u.getHost());
+  }
+  
+  @Test
+  public void groovyClassLoader() throws NitException {
+    NitDesc n = new NitDesc();
+    n.setSpec(NitDesc.NitSpec.GROOVY_CLASS_LOADER);
+    n.setScript(" public class A { \n"+
+            "int x; \n"+
+            "} ");
+    Object o = NitFactory.construct(n);
+    Assert.assertEquals("A", o.getClass().getName());
   }
   
 }
