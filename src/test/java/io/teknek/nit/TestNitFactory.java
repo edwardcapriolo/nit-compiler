@@ -18,6 +18,24 @@ public class TestNitFactory {
     Assert.assertEquals(1, c.call("dude"));
   }
   
+  @Test(expected=NullPointerException.class)
+  public void constructABadClosureDoesntThrowUntilCalled() throws NitException {
+    NitDesc n = new NitDesc();
+    n.setSpec(NitDesc.NitSpec.GROOVY_CLOSURE);
+    n.setScript("{ tuple -> println(tuple) xyz ; return 1 }");
+    Closure c = NitFactory.construct(n);
+    Assert.assertEquals(1, c.call("dude"));
+  } 
+  
+  @Test(expected=groovy.lang.MissingPropertyException.class)
+  public void constructABadClosureDoesntThrow() throws NitException {
+    NitDesc n = new NitDesc();
+    n.setSpec(NitDesc.NitSpec.GROOVY_CLOSURE);
+    n.setScript("{ tuple -> println(tupled) xyz ; return 1 }");
+    Closure c = NitFactory.construct(n);
+    Assert.assertEquals(1, c.call("dude"));
+  }
+  
   @Test
   public void constructANoArgCllass() throws NitException {
     NitDesc n = new NitDesc();
@@ -38,14 +56,14 @@ public class TestNitFactory {
   }
   
   @Test
-  public void constuctClassWithConArgsAndParams() throws NitException { 
+  public void constuctClassWithConArgsAndParams() throws NitException {
     NitDesc n = new NitDesc();
     n.setSpec(NitDesc.NitSpec.JAVA_LOCAL_CLASSPATH);
     n.setTheClass("java.net.URL");
-    n.setConstructorParameters( new Class [] { String.class, String.class, String.class } );
-    n.setConstructorArguments( new Object[]{ "http", "teknek.io", "/some/cool/stuff"} );
+    n.setConstructorParameters(new Class[] { String.class, String.class, String.class });
+    n.setConstructorArguments(new Object[] { "http", "teknek.io", "/some/cool/stuff" });
     URL u = NitFactory.construct(n);
-    Assert.assertEquals ("teknek.io", u.getHost());
+    Assert.assertEquals("teknek.io", u.getHost());
   }
   
 }
