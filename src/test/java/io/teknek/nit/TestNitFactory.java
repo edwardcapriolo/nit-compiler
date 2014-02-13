@@ -5,6 +5,7 @@ import java.net.URL;
 import junit.framework.Assert;
 import groovy.lang.Closure;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
@@ -103,4 +104,16 @@ public class TestNitFactory {
     Assert.assertEquals("A", o.getClass().getName());
   }
   
+  //Dont work in java 7 WTF
+  @Ignore
+  public void javaInJava() throws NitException {
+    NitDesc n = new NitDesc();
+    n.setSpec(NitDesc.NitSpec.JAVA_ON_JAVA);
+    n.setScript(" public class B { \n"+
+            "int x; \n"+
+            "} ");
+    n.setTheClass("B");
+    Object o = NitFactory.construct(n);
+    Assert.assertEquals("B", o.getClass().getName());
+  }
 }
