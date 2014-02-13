@@ -1,16 +1,33 @@
 package io.teknek.nit;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 
 import groovy.lang.Closure;
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyShell;
 
+import clojure.lang.Compiler;
+import clojure.lang.RT;
+import clojure.lang.Var;
+
 public class NitFactory {
 
   public static <T extends Object> T construct(NitDesc nitDesc) throws NitException {
-    if (nitDesc.spec == NitDesc.NitSpec.GROOVY_CLOSURE) {
+    if (nitDesc.spec == NitDesc.NitSpec.CLOJURE_CLOSURE ) {
+      try {
+        RT.load("clojure/core");
+      } catch (ClassNotFoundException | IOException e) {
+        e.printStackTrace();
+      }
+      Object result =  Compiler.load(new StringReader(nitDesc.getScript()));
+      if (result instanceof Var){
+        return (T) result;
+      } else{
+        throw new NitException("result did not compile into a clsure var"+ result);
+      }
+    } else if (nitDesc.spec == NitDesc.NitSpec.GROOVY_CLOSURE) {
       GroovyShell shell = new GroovyShell();
       Object result = shell.evaluate(nitDesc.getScript());
       if (result instanceof Closure) {

@@ -7,6 +7,8 @@ import groovy.lang.Closure;
 
 import org.junit.Test;
 
+import clojure.lang.Var;
+
 public class TestNitFactory {
 
   @Test
@@ -16,6 +18,16 @@ public class TestNitFactory {
     n.setScript("{ tuple -> println(tuple); return 1 }");
     Closure c = NitFactory.construct(n);
     Assert.assertEquals(1, c.call("dude"));
+  }
+  
+  
+  @Test
+  public void constructAClojClosure() throws NitException {
+    NitDesc n = new NitDesc();
+    n.setSpec(NitDesc.NitSpec.CLOJURE_CLOSURE);
+    n.setScript("(ns user) (defn fil [a] (if (= a  \"4\" ) a ))");
+    Var v = NitFactory.construct(n);
+    Assert.assertEquals(4, v.invoke("4"));
   }
   
   @Test(expected=NullPointerException.class)
