@@ -6,6 +6,9 @@ import junit.framework.Assert;
 import groovy.lang.Closure;
 
 import org.junit.Test;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
 
 import clojure.lang.Var;
 
@@ -29,6 +32,20 @@ public class TestNitFactory {
     Var v = NitFactory.construct(n);
     Assert.assertEquals("4", v.invoke("4"));
   }
+  
+  @Test
+  public void constructAJavaScript() throws NitException {
+    NitDesc n = new NitDesc();
+    n.setSpec(NitDesc.NitSpec.JAVASCRIPT_CLOSURE);
+    n.setScript("function over21(row) { if (row > 21) return true; else return false; }");
+    Function f = NitFactory.construct(n);
+    Context context = Context.enter();
+    Scriptable scope = context.initStandardObjects();
+    
+    Assert.assertEquals(true, f.call(context, scope, scope, new Object[]{ 22 }));
+  }
+  
+  
   
   @Test(expected=NullPointerException.class)
   public void constructABadClosureDoesntThrowUntilCalled() throws NitException {

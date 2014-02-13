@@ -12,10 +12,22 @@ import clojure.lang.Compiler;
 import clojure.lang.RT;
 import clojure.lang.Var;
 
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
+
+
 public class NitFactory {
 
   public static <T extends Object> T construct(NitDesc nitDesc) throws NitException {
-    if (nitDesc.spec == NitDesc.NitSpec.CLOJURE_CLOSURE ) {
+    if (nitDesc.spec == NitDesc.NitSpec.JAVASCRIPT_CLOSURE ) {
+      Context context = Context.enter();
+      Scriptable scope = context.initStandardObjects();
+      //scope //source //sourcename //linenumber // security domain
+      
+      Function function = context.compileFunction(scope, nitDesc.getScript(), "filter", 1, null);
+      return (T) function;
+    } else if (nitDesc.spec == NitDesc.NitSpec.CLOJURE_CLOSURE ) {
       try {
         RT.load("clojure/core");
       } catch (ClassNotFoundException | IOException e) {
