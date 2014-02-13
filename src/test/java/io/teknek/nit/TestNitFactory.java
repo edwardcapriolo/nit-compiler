@@ -23,7 +23,6 @@ public class TestNitFactory {
     Assert.assertEquals(1, c.call("dude"));
   }
   
-  
   @Test
   public void constructAClojClosure() throws NitException {
     NitDesc n = new NitDesc();
@@ -41,11 +40,9 @@ public class TestNitFactory {
     Function f = NitFactory.construct(n);
     Context context = Context.enter();
     Scriptable scope = context.initStandardObjects();
-    
     Assert.assertEquals(true, f.call(context, scope, scope, new Object[]{ 22 }));
+    Assert.assertEquals(false, f.call(context, scope, scope, new Object[]{ 20 }));
   }
-  
-  
   
   @Test(expected=NullPointerException.class)
   public void constructABadClosureDoesntThrowUntilCalled() throws NitException {
