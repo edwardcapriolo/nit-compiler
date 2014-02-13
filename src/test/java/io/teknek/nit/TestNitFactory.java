@@ -27,7 +27,7 @@ public class TestNitFactory {
     n.setSpec(NitDesc.NitSpec.CLOJURE_CLOSURE);
     n.setScript("(ns user) (defn fil [a] (if (= a  \"4\" ) a ))");
     Var v = NitFactory.construct(n);
-    Assert.assertEquals(4, v.invoke("4"));
+    Assert.assertEquals("4", v.invoke("4"));
   }
   
   @Test(expected=NullPointerException.class)
