@@ -8,19 +8,8 @@ import io.teknek.nit.agent.JavaOnJavaAgent;
 import io.teknek.nit.agent.JavascriptClosureAgent;
 import io.teknek.nit.agent.NitAgent;
 
-
-import java.io.PrintWriter;
-
-import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.EnumMap;
-import javax.tools.Diagnostic;
-import javax.tools.DiagnosticCollector;
-import javax.tools.JavaCompiler;
-import javax.tools.JavaCompiler.CompilationTask;
-import javax.tools.JavaFileObject;
-import javax.tools.ToolProvider;
 
 public class NitFactory {
 
