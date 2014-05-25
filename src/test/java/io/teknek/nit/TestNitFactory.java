@@ -15,6 +15,8 @@ import clojure.lang.Var;
 
 public class TestNitFactory {
 
+  private NitFactory NitFactory = new NitFactory();
+  
   @Test
   public void constructAClosure() throws NitException {
     NitDesc n = new NitDesc();

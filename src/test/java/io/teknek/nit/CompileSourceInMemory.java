@@ -1,4 +1,6 @@
 package io.teknek.nit;
+import io.teknek.nit.agent.JavaSourceFromString;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
