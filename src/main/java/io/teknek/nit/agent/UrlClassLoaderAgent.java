@@ -14,7 +14,7 @@ public class UrlClassLoaderAgent implements NitAgent {
 
   @Override
   public Object createInstance(NitDesc nitDesc) throws NitException {
-    List<URL> urls = parseSpecIntoUrlList(nitDesc.getSpec().toString());
+    List<URL> urls = parseSpecIntoUrlList(nitDesc.getScript().toString());
     try (URLClassLoader loader = new URLClassLoader(urls.toArray(new URL[0]))) {
       Class<?> c = loader.loadClass(nitDesc.getTheClass());
       return c.newInstance();
@@ -31,7 +31,7 @@ public class UrlClassLoaderAgent implements NitAgent {
         URL u = new URL(s);
         urls.add(u);
       } catch (MalformedURLException e) { 
-        //logger.warn("Specified url " + s + "could not be parsed");
+        throw new RuntimeException(e);
       }
     }
     return urls;
