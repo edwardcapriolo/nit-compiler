@@ -4,7 +4,7 @@
 	<groupId>io.teknek</groupId>
 	<artifactId>nit-compiler</artifactId>
 	<name>nit-compiler</name>
-	<version>0.0.4</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<description>Now Is Time compiler. Compiles and makes accessible dynamic code from a Java API</description>
 	<packaging>jar</packaging>
 
