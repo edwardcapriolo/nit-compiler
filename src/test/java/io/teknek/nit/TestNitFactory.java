@@ -1,5 +1,7 @@
 package io.teknek.nit;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import junit.framework.Assert;
@@ -16,6 +18,19 @@ import clojure.lang.Var;
 public class TestNitFactory {
 
   private NitFactory NitFactory = new NitFactory();
+  
+  @Test
+  public void urlConstruct() throws NitException, MalformedURLException{
+    NitDesc n = new NitDesc();
+    String cname = "io.teknek.nit.TestObject";
+    n.setSpec(NitDesc.NitSpec.JAVA_URL_CLASSLOADER);
+    n.setTheClass(cname);
+    File f = new File("src/test/resources/test-url.jar");
+    Assert.assertTrue(f.exists());
+    n.setScript(f.toURL().toString());
+    Object oo = NitFactory.construct(n);
+    Assert.assertEquals(cname, oo.getClass().getName());
+  }
   
   @Test
   public void constructAClosure() throws NitException {

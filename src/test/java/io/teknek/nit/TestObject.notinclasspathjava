@@ -1,0 +1,7 @@
+package io.teknek.nit;
+
+public class TestObject {
+  public TestObject(){
+    
+  }
+}
