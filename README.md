@@ -1,15 +1,16 @@
 nit-compiler
 ============
 
-Now Is Time Compiler (build gvoory scala and other dynamic classloader goodness from java)
+Now Is Time Compiler.
 
-Essentially my go-to-move is to bring groovy into a project for extensability. I wanted to build
-a dynamic/reflection based project to use with teknek as well as other projects.
+An easy way to leverage interpreted JVM languages from java. As well doing URL classloading, reflection, and hot-loading. NitWraps this up into a single project.
 
-Support for JavaScript,Clojure, and Groovy. Up next scala, Jython, JRuby.
+Support for JavaScript, Clojure, Groovy, URL Class loading, and Scala. Up next Jython, JRuby.
 
 Usage
 =====
+
+Nit lets you eval a string and compile it into code using one of several interpreted languages.
 
     @Test
     public void constructAClosure() throws NitException {
@@ -28,5 +29,7 @@ Usage
       Object o = NitFactory.construct(n);
       Assert.assertNotNull(o);
     }
+
+
 
 In the long run nit will (probably) do a bunch of "Crazy" stuff like compile java inside java, build jars of java compiled inside java etc.
