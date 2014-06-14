@@ -1,8 +1,11 @@
 package io.teknek.nit;
 
+import io.teknek.nit.NitDesc.NitSpec;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 import junit.framework.Assert;
 import groovy.lang.Closure;
@@ -12,6 +15,8 @@ import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+
+import scala.collection.mutable.Map;
 
 import clojure.lang.Var;
 
@@ -119,6 +124,21 @@ public class TestNitFactory {
             "} ");
     Object o = NitFactory.construct(n);
     Assert.assertEquals("A", o.getClass().getName());
+  }
+  
+  @Test
+  public void scala() throws NitException{
+    NitDesc n = new NitDesc();
+    n.setSpec(NitSpec.SCALA_CLOSURE);
+    n.setScript("import scala.collection.mutable.Map;"+
+    "{ (row: Map[String, Any]) => row.get(\"value\").collect { case v: Int if v > 21 => row } }");
+    Object o = NitFactory.construct(n);
+    Assert.assertTrue (o instanceof scala.Function1);
+    scala.Function1 f = (scala.Function1) o;
+    java.util.Map<String,Integer> m =  new java.util.HashMap<String,Integer>();
+    m.put("value", 22);
+    Object result = f.apply(scala.collection.JavaConversions.mapAsScalaMap(m));
+    Assert.assertEquals("Some", result.getClass().getSimpleName());
   }
   
   //Dont work in java 7 WTF

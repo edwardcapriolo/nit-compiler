@@ -59,6 +59,13 @@
         	</dependency>
 
 		<dependency>
+			<groupId>com.twitter</groupId>
+			<artifactId>util-eval_2.10</artifactId>
+			<version>6.16.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
       			<groupId>org.mozilla</groupId>
       			<artifactId>rhino</artifactId>
       			<version>1.7R4</version>
