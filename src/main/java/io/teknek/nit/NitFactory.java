@@ -7,6 +7,7 @@ import io.teknek.nit.agent.JavaLocalClasspathAgent;
 import io.teknek.nit.agent.JavaOnJavaAgent;
 import io.teknek.nit.agent.JavascriptClosureAgent;
 import io.teknek.nit.agent.NitAgent;
+import io.teknek.nit.agent.ScalaClosureAgent;
 import io.teknek.nit.agent.UrlClassLoaderAgent;
 
 import java.lang.reflect.InvocationTargetException;
@@ -33,6 +34,8 @@ public class NitFactory {
         agent = new JavaOnJavaAgent();
       } else if (nitDesc.spec == NitDesc.NitSpec.JAVA_URL_CLASSLOADER ) {
         agent = new UrlClassLoaderAgent();
+      } else if (nitDesc.spec == NitDesc.NitSpec.SCALA_CLOSURE){
+        agent = new ScalaClosureAgent();
       } else {
         throw new NitException(nitDesc.spec + " not found");
       }

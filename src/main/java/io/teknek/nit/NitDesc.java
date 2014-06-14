@@ -1,7 +1,16 @@
 package io.teknek.nit;
 
 public class NitDesc {
-  public enum NitSpec { JAVA_LOCAL_CLASSPATH, JAVA_URL_CLASSLOADER, GROOVY_CLOSURE, GROOVY_CLASS_LOADER, CLOJURE_CLOSURE, JAVASCRIPT_CLOSURE , JAVA_ON_JAVA};
+  public enum NitSpec {
+    JAVA_LOCAL_CLASSPATH, 
+    JAVA_URL_CLASSLOADER, 
+    GROOVY_CLOSURE, 
+    GROOVY_CLASS_LOADER, 
+    CLOJURE_CLOSURE, 
+    JAVASCRIPT_CLOSURE, 
+    JAVA_ON_JAVA,
+    SCALA_CLOSURE
+  };
   protected NitSpec spec;
   
   /**
@@ -57,7 +66,5 @@ public class NitDesc {
   public void setTheClass(String theClass) {
     this.theClass = theClass;
   }
-
-  
-  
+ 
 }
